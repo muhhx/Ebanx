@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 
-import { AccountRouter } from "./router/AccountRouter";
+import { AccountRouter } from "./routes/AccountRouter";
 import { errorMiddleware } from "./middlewares/errorMiddleware";
 
 class App {
