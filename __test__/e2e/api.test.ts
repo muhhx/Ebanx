@@ -1,6 +1,14 @@
 import request from "supertest";
 import { server } from "../../src/server";
 
+/**
+ * Functionalities that I've prefered to not include:
+ *
+ * - Generate error when -> Withdraw more than the current account balance
+ * - Generate error when -> Transfer more than the current balance of the origin account
+ * - Generate error when -> Transfer amount into the same account (origin = destination)
+ */
+
 describe("Reset", () => {
   it("returns status code 200 and response OK if database is reset.", async () => {
     await request(server)

@@ -30,7 +30,11 @@ class AccountController {
         return res.status(201).json(data);
       }
 
-      return res.send("OK");
+      if (type === "transfer") {
+        const data = AccountServices.transfer({ amount, origin, destination });
+
+        return res.status(201).json(data);
+      }
     } catch (error) {
       next(error);
     }
