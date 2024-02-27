@@ -24,6 +24,12 @@ class AccountController {
         return res.status(201).json(data);
       }
 
+      if (type === "withdraw") {
+        const data = AccountServices.withdraw({ amount, origin });
+
+        return res.status(201).json(data);
+      }
+
       return res.send("OK");
     } catch (error) {
       next(error);

@@ -34,3 +34,5 @@ export type EventRequest = ApplicationRequest<
 >;
 
 export type DepositParams = Pick<EventBody, "destination" | "amount">;
+
+export type WithdrawParams = Pick<EventBody, "origin" | "amount">;
