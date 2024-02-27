@@ -1,6 +1,8 @@
 import express from "express";
 import cors from "cors";
 
+import { errorMiddleware } from "./middlewares/errorMiddleware";
+
 class App {
   private server: express.Application;
 
@@ -13,6 +15,7 @@ class App {
   private middlewares() {
     this.server.use(cors({ origin: "*" }));
     this.server.use(express.json());
+    this.server.use(errorMiddleware);
   }
 
   getServer() {
