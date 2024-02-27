@@ -41,3 +41,5 @@ export type TransferParams = Pick<
   EventBody,
   "destination" | "origin" | "amount"
 >;
+
+export type ErrorResponse = number | string;

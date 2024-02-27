@@ -1,5 +1,4 @@
-type ErrorResponse = number | string;
-
+import { ErrorResponse } from "../types";
 abstract class ApplicationError extends Error {
   abstract internalCode: string;
   abstract code: number;
