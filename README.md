@@ -2,14 +2,13 @@
 
 ## Important note
 
-For the sake of simplicity, I've prefered to not implement the following specific use cases:
+For the sake of simplicity, I've prefered to not implement the following use cases:
 
 - Generate error when -> Withdraw more than the current account balance,
 - Generate error when -> Transfer more than the current balance of the origin account,
 - Generate error when -> Transfer amount into the same account (origin = destination).
 
 However, I can definitely implement them if needed.
-s
 
 ## How to run locally
 
