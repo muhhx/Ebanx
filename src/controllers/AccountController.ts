@@ -18,6 +18,12 @@ class AccountController {
     try {
       const { type, destination, origin, amount } = req.body;
 
+      if (type === "deposit") {
+        const data = AccountServices.deposit({ amount, destination });
+
+        return res.status(201).json(data);
+      }
+
       return res.send("OK");
     } catch (error) {
       next(error);
