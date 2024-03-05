@@ -101,6 +101,20 @@ describe("Event / Withdraw", () => {
         expect(res.body).toEqual({ origin: { id: "400", balance: 10 } });
       });
   });
+  it("returns error if amount being withdrawn is bigger than the current account balance", async () => {
+    await request(server)
+      .post("/event")
+      .send({
+        type: "deposit",
+        destination: "1000",
+        amount: 10,
+      })
+      .expect(201);
+    await request(server)
+      .post("/event")
+      .send({ type: "withdraw", origin: "1000", amount: 20 })
+      .expect(400);
+  });
   it("returns Validation Error if params are invalid for type withdraw.", async () => {
     await request(server).post("/event").send({ type: "withdraw" }).expect(400);
     await request(server)

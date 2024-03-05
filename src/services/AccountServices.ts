@@ -1,5 +1,6 @@
 import { db } from "../database";
 import { NotFoundError } from "../errors/NotFoundError";
+import { NotAllowedError } from "../errors/NotAllowedError";
 import { DepositParams, WithdrawParams, TransferParams } from "../types";
 
 class AccountServices {
@@ -20,6 +21,7 @@ class AccountServices {
     const currentBalance = db.account.getBalance(origin);
     if (currentBalance === null) throw new NotFoundError();
     const newBalance = currentBalance - amount;
+    if (newBalance < 0) throw new NotAllowedError();
     const data = db.account.updateBalance(origin, newBalance);
     return { origin: { id: data.id, balance: data.value } };
   }
@@ -28,16 +30,13 @@ class AccountServices {
     const originBalance = db.account.getBalance(origin);
     const destBalance = db.account.getBalance(destination);
     if (originBalance === null) throw new NotFoundError();
-
     const newOriginBalance = originBalance - amount;
     const newDestBalance = (destBalance || 0) + amount;
-
     const dataOrigin = db.account.updateBalance(origin, newOriginBalance);
     const dataDest = db.account.updateOrCreateBalance(
       destination,
       newDestBalance
     );
-
     return {
       origin: { id: dataOrigin.id, balance: dataOrigin.value },
       destination: { id: dataDest.id, balance: dataDest.value },
